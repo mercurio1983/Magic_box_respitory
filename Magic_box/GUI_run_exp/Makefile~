@@ -1,0 +1,31 @@
+
+CC = gcc
+CFLAGS = -Wall
+LIBFLAGS =  -lstdc++ -g
+SDLFLAGS = `wx-config --cxxflags` `wx-config --libs`
+SOURCES = run_exp.cpp test_run.cpp
+OBJECTS = run_exp.o test_run.o
+PROGRAM = run_exp
+SOURCE1 = test_call_prog.cpp
+OBJECT1 = test_call_prog.o
+PROGRAM1 = test_call_prog
+
+$(OBJECTS): $(SOURCES)
+	$(CC) $(CFLAGS) -c $(SOURCES) -I. $(LIBFLAGS) $(SDLFLAGS)
+ 
+$(PROGRAM): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $(PROGRAM) -I. $(LIBFLAGS) $(SDLFLAGS)
+
+
+$(OBJECT1): $(SOURCE1)
+	$(CC) $(CFLAGS) -c $(SOURCE1) -I. $(LIBFLAGS)
+ 
+$(PROGRAM1): $(OBJECT1)
+	$(CC) $(OBJECT1) -o $(PROGRAM1) -I. $(LIBFLAGS)
+	
+all: $(PROGRAM)
+
+test: $(PROGRAM1)
+
+clean:
+	rm run_exp.o test_run.o run_exp

@@ -1,0 +1,10 @@
+Right now I feel..
+1. Extremely dissatisfied 
+2. Mostly dissatisfied 
+3. Moderately dissatisfied 
+4. Slightly dissatisfied  
+5. Neither dissatisfied  
+6. Slightly satisfied 
+7. Moderately satisfied 
+8. Mostly satisfied 
+9. Extremely satisfied 
