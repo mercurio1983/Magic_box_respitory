@@ -36,7 +36,7 @@ CC2 = g++
 #NV = /usr/local/cuda/bin/nvcc
 NV = /usr/bin/nvcc
 #node.o queue4.o
-OBJS1 = stereoviewGL_delay.o questionare.o tools.o
+#OBJS1 = stereoviewGL_delay.o questionare.o tools.o
 OBJS2 = queue_Wrapper.o
 OBJS3 = image_lr.o node.o queue4.o
 
@@ -59,8 +59,8 @@ SOURCE8 = stereoviewGL_delay3D.c rendering.c tools.c
 SOURCE82 = stereoviewGL_delay3D_version2.c rendering.c tools.c
 #SOURCE4 = stereoviewGL_delay2.c questionare.c tools.c
 #SOURCE5 = stereoviewGL_delay.c questionare.c tools.c
-PROG = stereoviewGL_delay
-PROG2 = stereoviewGL_delay2
+#PROG = stereoviewGL_delay
+#PROG2 = stereoviewGL_delay2
 PROG3 = stereoviewGL_delay3D
 PROG32 = stereoviewGL_delay3D_version2
 
@@ -93,8 +93,8 @@ $(OBJS2): $(SOURCE2)
 
 
 
-$(PROG): $(OBJS3) $(OBJS2) $(OBJS1) 
-	$(CC) $(OBJS3) $(OBJS2) $(OBJS1) -o  $(PROG) -I. $(LIBFLAGS) $(SDLFLAGS) $(LDFLAGS)
+#$(PROG): $(OBJS3) $(OBJS2) $(OBJS1) 
+	#$(CC) $(OBJS3) $(OBJS2) $(OBJS1) -o  $(PROG) -I. $(LIBFLAGS) $(SDLFLAGS) $(LDFLAGS)
 	
 
 $(OBJSTEST): $(SOURCETEST)
@@ -132,16 +132,11 @@ $(PROG32): lib/libnvstusb.a $(OBJS3) $(OBJS2) $(OBJS82) $(OBJS6) $(OBJS7)
 #	$(CC) -o avt_singleview-new avt_singleview.c -I. $(LIBFLAGS)
 #	$(CC) -o dc1394_multiview dc1394_multiview.c -I. $(LIBFLAGS)
 
-gl: stereoviewGL.c tools.c
-	#$(CC) -o stereoviewGL questionare.c tools.c split_image_stereoviewGL.c -I. $(LIBFLAGS) $(SDLFLAGS)
-	$(CC) -o stereoviewGL questionare.c tools.c stereoviewGL.c -I. $(LIBFLAGS) $(SDLFLAGS)
+#delay: $(PROG)
 
-gl2: stereoviewGL2.c tools.c 
-		$(CC) -o stereoviewGL2 questionare.c tools.c stereoviewGL2.c -I. $(LIBFLAGS) $(SDLFLAGS)
+#delay2: $(PROG2)
 
-delay: $(PROG)
-
-delay2: $(PROG2)
+all: delay3 delay32
 
 delay3: $(PROG3)
 
@@ -150,36 +145,13 @@ delay32: $(PROG32)
 lib/libnvstusb.a: 
 		make -C lib
 
-testing_queue: $(PROG3)
+clean: clean_delay3 clean_delay32
 
-gl3: split_image_stereoviewGL.c tools.c
-		$(CC) -o stereoviewGL3 questionare.c tools.c split_image_stereoviewGL.c -I. $(LIBFLAGS) $(SDLFLAGS)
-
-gl4: stereoviewGL4.c tools.c
-		$(CC) -o stereoviewGL4 questionare.c tools.c stereoviewGL4.c -I. $(LIBFLAGS) $(SDLFLAGS)
-
-
-test_ffmpeg: test_ffmpeg.c
-	$(CC) -o test_ffmpeg test_ffmpeg.c -I. $(LIBFLAGS3)
-
-
-tex: testtex.c tools.c
-	$(CC) -o testtex questionare.c tools.c testtex.c -I. $(LIBFLAGS) $(SDLFLAGS)
-
-text: glutfonts.c
-	$(CC) -o glutfonts glutfonts.c -I. $(LIBFLAGS) $(SDLFLAGS)
-
-http: testmicrohttpd.c
-	$(CC) -o testmicrohttpd testmicrohttpd.c -I. $(LIBFLAGS)
-
-seed: testseed.c
-	$(CC) -o testseed testseed.c -I. $(LIBFLAGS)
-
-clean_delay2:
-	rm stereoviewGL_delay2.o questionare.o tools.o queue_Wrapper.o image_lr.o  stereoviewGL_delay2
+#clean_delay:
+	#rm *.o $(PROG)
 	
-clean_test_queue:
-	rm testing_queue
-
-clean_test_ffmpeg: 
-	rm -rf *o test_ffmpeg
+clean_delay3:
+	rm *.o $(PROG3)
+	
+clean_delay32:
+	rm *.o $(PROG32)
